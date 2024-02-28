@@ -3,7 +3,7 @@ import Select from "./index";
 
 describe("When a select is created", () => {
   it("a list of choices is displayed", () => {
-    render(<Select selection={["value1", "value2"]} />);
+    render(<Select selection={["Toutes", "value1", "value2"]} />);
     const selectElement = screen.getByTestId("select-testid");
     const selectDefault = screen.getByText("Toutes");
     expect(selectElement).toBeInTheDocument();
@@ -25,7 +25,7 @@ describe("When a select is created", () => {
 
   describe("and a click is trigger on collapse button", () => {
     it("a list of values is displayed", () => {
-      render(<Select selection={["value1", "value2"]} />);
+      render(<Select selection={["value1", "value2"]} defaultFirstOption={false}/>);
       const collapseButtonElement = screen.getByTestId(
         "collapse-button-testid"
       );
@@ -44,7 +44,7 @@ describe("When a select is created", () => {
     describe("and a click is triggered on a choice item", () => {
       it("a onChange callback is called", () => {
         const onChange = jest.fn();
-        render(<Select selection={["value1", "value2"]} onChange={onChange} />);
+        render(<Select selection={["Toutes","value1", "value2"]} onChange={onChange} />);
         const collapseButtonElement = screen.getByTestId(
           "collapse-button-testid"
         );

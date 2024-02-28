@@ -9,14 +9,14 @@ const Select = ({
   selection,
   onChange,
   name,
-  titleEmpty,
   label,
+  defaultFirstOption = true,
   type = "normal",
 }) => {
   const [value, setValue] = useState();
   const [collapsed, setCollapsed] = useState(true);
   const changeValue = (newValue) => {
-    onChange();
+    onChange(newValue);
     setValue(newValue);
     setCollapsed(newValue);
   };
@@ -26,26 +26,24 @@ const Select = ({
       <div className="Select">
         <ul>
           <li className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}>
-            {value || (!titleEmpty && "Toutes")}
+            {value || defaultFirstOption && selection[0]}
           </li>
           {!collapsed && (
             <>
-              {!titleEmpty && (
-                <li onClick={() => changeValue(null)}>
-                  <input defaultChecked={!value} name="selected" type="radio" />{" "}
-                  Toutes
-                </li>
-              )}
-              {selection.map((s) => (
-                <li key={s} onClick={() => changeValue(s)}>
-                  <input
-                    defaultChecked={value === s}
-                    name="selected"
-                    type="radio"
-                  />{" "}
-                  {s}
-                </li>
-              ))}
+              {selection.map((s) => {
+                if (!s) return null;
+
+                return (
+                  <li key={s + name} onClick={() => changeValue(s)}>
+                    <input
+                      defaultChecked={value === s}
+                      name="selected"
+                      type="radio"
+                    />{" "}
+                    {s}
+                  </li>
+                )
+              })}
             </>
           )}
         </ul>
@@ -85,15 +83,15 @@ Select.propTypes = {
   selection: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChange: PropTypes.func,
   name: PropTypes.string,
-  titleEmpty: PropTypes.bool,
   label: PropTypes.string,
+  defaultFirstOption: PropTypes.bool,
   type: PropTypes.string,
 }
 
 Select.defaultProps = {
   onChange: () => null,
-  titleEmpty: false,
   label: "",
+  defaultFirstOption: true,
   type: "normal",
   name: "select",
 }
