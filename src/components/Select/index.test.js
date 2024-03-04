@@ -25,7 +25,9 @@ describe("When a select is created", () => {
 
   describe("and a click is trigger on collapse button", () => {
     it("a list of values is displayed", () => {
-      render(<Select selection={["value1", "value2"]} defaultFirstOption={false}/>);
+      render(
+        <Select selection={["value1", "value2"]} defaultFirstOption={false} />
+      );
       const collapseButtonElement = screen.getByTestId(
         "collapse-button-testid"
       );
@@ -44,7 +46,12 @@ describe("When a select is created", () => {
     describe("and a click is triggered on a choice item", () => {
       it("a onChange callback is called", () => {
         const onChange = jest.fn();
-        render(<Select selection={["Toutes","value1", "value2"]} onChange={onChange} />);
+        render(
+          <Select
+            selection={["Toutes", "value1", "value2"]}
+            onChange={onChange}
+          />
+        );
         const collapseButtonElement = screen.getByTestId(
           "collapse-button-testid"
         );
