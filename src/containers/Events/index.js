@@ -15,14 +15,14 @@ const EventList = () => {
   const [type, setType] = useState(DEFAULT_CATEGORIES);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const filteredType = ((!type
-    ? data?.events
-    : data?.events) || []).filter((event) => {
-    if (event.type === type || type === DEFAULT_CATEGORIES) {
-      return true;
+  const filteredType = ((!type ? data?.events : data?.events) || []).filter(
+    (event) => {
+      if (event.type === type || type === DEFAULT_CATEGORIES) {
+        return true;
+      }
+      return false;
     }
-    return false;
-  });
+  );
 
   const filteredEvents = filteredType.filter((event, index) => {
     if (
@@ -49,7 +49,7 @@ const EventList = () => {
         <>
           <h3 className="SelectTitle">Catégories</h3>
           <Select
-            selection={['Toutes'].concat(Array.from(typeList))}
+            selection={["Toutes"].concat(Array.from(typeList))}
             onChange={(value) => (value ? changeType(value) : changeType(null))}
           />
           <div id="events" className="ListContainer">
@@ -68,7 +68,7 @@ const EventList = () => {
                     />
                   )}
                 </Modal>
-              )
+              );
             })}
           </div>
           <div className="Pagination">

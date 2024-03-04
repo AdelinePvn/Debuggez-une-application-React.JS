@@ -26,7 +26,7 @@ const Select = ({
       <div className="Select">
         <ul>
           <li className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}>
-            {value || defaultFirstOption && selection[0]}
+            {value || (defaultFirstOption && selection[0])}
           </li>
           {!collapsed && (
             <>
@@ -42,7 +42,7 @@ const Select = ({
                     />{" "}
                     {s}
                   </li>
-                )
+                );
               })}
             </>
           )}
@@ -86,7 +86,7 @@ Select.propTypes = {
   label: PropTypes.string,
   defaultFirstOption: PropTypes.bool,
   type: PropTypes.string,
-}
+};
 
 Select.defaultProps = {
   onChange: () => null,
@@ -94,6 +94,6 @@ Select.defaultProps = {
   defaultFirstOption: true,
   type: "normal",
   name: "select",
-}
+};
 
 export default Select;
